@@ -8,6 +8,8 @@ package swen20003;
 
 import java.io.IOException;
 
+import java.nio.file.Paths;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Font;
@@ -51,7 +53,11 @@ public class RPG extends BasicGame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.font = FontLoader.loadFont("assets/DejaVuSans-Bold.ttf", 15);
+		try {
+			this.font = FontLoader.loadFont(Paths.get(getClass().getResource("/assets/DejaVuSans-Bold.ttf").toURI()).toString(), 15);
+		} catch (java.net.URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

@@ -18,7 +18,7 @@ import org.newdawn.slick.SlickException;
  * Handles groups of Monster objects
  */
 public class Spawn {
-	private static final String UNITDATA = "data/units.dat";
+
 	private List<Monster> monsters;
 
 	/**
@@ -44,24 +44,28 @@ public class Spawn {
 	 * @throws SlickException
 	 */
 	public void coordinates(String type) throws IOException, SlickException {
-		for (String line : Files.readAllLines(Paths.get(UNITDATA))) {
-			try {
-				double x = Double.parseDouble(line.split(",")[1]);
-				double y = Double.parseDouble(line.split(",")[2]);
-				if (line.contains("Bandit") && type == "bandit") {
-					this.monsters.add(new Bandit(x, y));
-				} else if (line.contains("GiantBat") && type == "dreadbat") {
-					this.monsters.add(new Dreadbat(x, y));
-				} else if (line.contains("Draelic") && type == "necromancer") {
-					this.monsters.add(new Necromancer(x, y));
-				} else if (line.contains("Skeleton") && type == "skeleton") {
-					this.monsters.add(new Skeleton(x, y));
-				} else if (line.contains("Zombie") && type == "zombie") {
-					this.monsters.add(new Zombie(x, y));
+		try {
+			for (String line : Files.readAllLines(Paths.get(getClass().getResource("/data/units.dat").toURI()))) {
+				try {
+					double x = Double.parseDouble(line.split(",")[1]);
+					double y = Double.parseDouble(line.split(",")[2]);
+					if (line.contains("Bandit") && type == "bandit") {
+						this.monsters.add(new Bandit(x, y));
+					} else if (line.contains("GiantBat") && type == "dreadbat") {
+						this.monsters.add(new Dreadbat(x, y));
+					} else if (line.contains("Draelic") && type == "necromancer") {
+						this.monsters.add(new Necromancer(x, y));
+					} else if (line.contains("Skeleton") && type == "skeleton") {
+						this.monsters.add(new Skeleton(x, y));
+					} else if (line.contains("Zombie") && type == "zombie") {
+						this.monsters.add(new Zombie(x, y));
+					}
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
 				}
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
 			}
+		} catch (java.net.URISyntaxException e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -91,5 +91,12 @@
       <scope>system</scope>
       <type>jar</type>
     </dependency>
+    <dependency>
+      <groupId>javax.jnlp</groupId>
+      <artifactId>jnlp-api</artifactId>
+      <version>5.0</version>
+      <scope>system</scope>
+      <systemPath>${pom.basedir}/lib/jnlp.jar</systemPath>
+    </dependency>
   </dependencies>
 </project>
